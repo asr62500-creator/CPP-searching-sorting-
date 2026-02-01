@@ -21,6 +21,7 @@ void perm(int arr[], int left, int right)
 
 int main()
 {
+
     int arr[] = {1, 2, 3, 4};
     int n = 4;
 
