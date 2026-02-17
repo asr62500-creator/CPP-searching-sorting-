@@ -1,57 +1,3 @@
-// #include<iostream>
-// using namespace std;
-
-// struct Node{
-//     int data;
-//     Node * next;
-// };
-
-// void insertFront(Node*& Head, int value){
-//     Node* newNode = new Node;
-//     newNode->data = value;
-//     newNode ->next = NULL; // newNode → [value | NULL]
-
-//     //If List Empty
-//       if (Head == NULL){
-       
-//         Head = newNode;
-//         return;
-//     }
-//     // if List is not Empty
-//        Node* temp = Head;
-
-//     while (temp->next != NULL){
-//         temp = temp->next;
-//     }
-
-//     newNode->next = temp->next; //Attach New Node
-//     temp->next = newNode;
-// }
- 
-// void displayList(Node*Head){
-//     Node* temp = Head;
-//     while(temp != NULL)
-//     {
-//         cout << temp->data << " -> ";
-//         temp = temp->next; // shift ponter to the next node value
-//     }
-//     cout << "NULL" << endl; // When list end we print NULL and Stop
-// }
-
-// int main(){
-//     Node*Head=NULL;
-
-//     insertFront(Head,10);
-//     insertFront(Head,20);
-//     insertFront(Head,30);
-//     insertFront(Head,40);
-
-//     cout<<"Linked List:";
-//     displayList(  Head  );
-    
-//     return 0;
-// }
-
 #include<iostream>
 using namespace std;
 
@@ -59,7 +5,7 @@ struct Node{
     int data;
     struct Node * next;
 };
-
+// ********************************************* DISPLAYlist **********************************************************//
 void displayList(Node*Head){
     Node*temp=Head;
     while (temp!=NULL)
@@ -69,17 +15,40 @@ void displayList(Node*Head){
     }
     cout<<"Null";
 }
+// ******************************************** INSERT at BEGINING *****************************************************//
 void insertBegining(Node*&Head,int value){
     //Firstly create a NewNode then insert data in it and then set its pointer as well as shift head to newNode;
     Node*newNode=new Node;
     newNode->data=value;
     newNode->next=Head;
     Head=newNode;
+
+    //If list is empty
+    if(Head==NULL){
+        Head=newNode;
+    }
 }
+// ******************************************** INSERT at LAST *******************************************************//
 void insertEnd(Node*&Head,int value){
+     Node*newNode=new Node;
+    newNode->data=value;
+    newNode->next=NULL;
+
+    //If list is empty
+    if(Head==NULL){
+        Head=newNode;
+    }
+    
+    Node* temp = Head;
+    // move to last node
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    // attach new node
+    temp->next = newNode;
 
 }
-
+// ********************************************* COUNTnodes **********************************************************//
 int countNodes(Node* head){
     int count = 0;
     Node* temp = head;
@@ -88,9 +57,9 @@ int countNodes(Node* head){
         count++;
         temp = temp->next;
     }
-
     return count;
 }
+// ********************************************* MAIN **************************************************************//
 int main(){
     //Create a List
     Node*Head=new Node();
@@ -111,16 +80,27 @@ int main(){
     cout<<"Original Link List: ";
     displayList(Head);
 
-    cout << "\nNumber of nodes = " << countNodes(Head);
+    //count the no of Nodes
+    cout << "\nNumber of nodes  = " << countNodes(Head);
 
-    //Add newNOde
+    //Add newNOde at Front
     //function call to enter the newNode at the Begining
     insertBegining(Head,10);
 
-    cout<<"\n After linking newNode: ";
+    //count the no of Nodes
+    cout<<"\nList after Link newNode at FRONT: ";
     displayList(Head);
 
-    cout << "\nNumber of nodes = " << countNodes(Head);
-    
+    //count the no of Nodes
+    cout << "\nNumber of nodes * = " << countNodes(Head);
+
+    //Add newNOde at LAST
+    insertEnd(Head,50);
+
+    cout<<"\nList after Linking newNode at LAST: ";
+    displayList(Head);
+
+    cout << "\nNumber of nodes ** = " << countNodes(Head);
+
     return 0;
 }
